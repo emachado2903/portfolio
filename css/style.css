@@ -384,7 +384,8 @@ img { max-width: 100%; display: block; }
 }
 
 .project-card:hover .project-flip,
-.project-card:focus-visible .project-flip {
+.project-card:focus-visible .project-flip,
+.project-card.is-flipped .project-flip {
   transform: rotateY(180deg);
 }
 
@@ -465,6 +466,19 @@ img { max-width: 100%; display: block; }
   font-size: 11px;
   opacity: 0.7;
   letter-spacing: 0.04em;
+}
+
+/* TrailPaceTracker's title + note run longer than the other cards' —
+   size them down a touch and nudge the block down so it sits centered
+   in the circle instead of crowding the curved top edge */
+.project-face--back-tight {
+  font-size: 14.5px;
+  padding: 20px 14px 10px;
+  gap: 4px;
+}
+
+.project-face--back-tight .project-face-note {
+  font-size: 10px;
 }
 
 .works-note {
@@ -566,8 +580,10 @@ img { max-width: 100%; display: block; }
 /* ---------------- Responsive (mobile) ---------------- */
 
 @media (max-width: 860px) {
-  .site-nav { padding: 14px 20px; }
-  .nav-links { gap: 20px; font-size: 13px; }
+  .site-nav { padding: 12px 16px; }
+  .logo { width: 46px; height: 46px; }
+  .nav-links { gap: 16px; font-size: 13.5px; }
+  .theme-toggle { width: 38px; height: 38px; }
 
   .hero { padding: 0 24px; min-height: 58vh; }
 
@@ -580,9 +596,18 @@ img { max-width: 100%; display: block; }
   .works { padding: 60px 20px; }
   .project-grid { gap: 26px; }
   .project-card { width: 140px; height: 140px; }
+  /* on touch devices there's no hover, so cards flip on first tap via JS
+     (adds .is-flipped) and open on a second tap of the same card */
+  .works-note { margin-top: 36px; }
 
   .contact { padding: 60px 24px; }
   .contact-inner { grid-template-columns: 1fr; gap: 36px; }
   .contact-heading { order: 1; }
   .contact-form { order: 2; }
+}
+
+@media (max-width: 400px) {
+  .site-nav { padding: 10px 12px; }
+  .logo { width: 40px; height: 40px; }
+  .nav-links { gap: 10px; font-size: 12px; }
 }
