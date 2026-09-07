@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="light dark" />
+<title>Brasa Coffee Co. — Mobile Coffee Catering, San Antonio TX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brown-dark: #2e1d0e;
+    --cream: #f6f3ee;
+    --cream-2: #faf7f2;
+    --accent-arch: #d4bbac;
+    --text-muted: #a07840;
+    --text-body: #5c4a34;
+    --border: #e8e0d0;
+    --page-bg: var(--cream-2);
+    --text-primary: var(--brown-dark);
+    --card-bg: #ffffff;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --page-bg: #1c130a;
+      --text-primary: #f3e6d3;
+      --text-body: #d8c4a8;
+      --text-muted: #d4bbac;
+      --card-bg: #2e1d0e;
+      --border: #4a3826;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    background: var(--page-bg);
+    color: var(--text-primary);
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  img { max-width: 100%; display: block; }
+
+  /* ---------- NAV ---------- */
+  .navbar {
+    background: var(--brown-dark);
+    position: relative;
+    padding: 1.1rem 1.5rem;
+  }
+
+  .nav-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .nav-links {
+    justify-self: start;
+    display: flex;
+    gap: 1.75rem;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+
+  .nav-links a { transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 0.7; }
+
+  .nav-contact {
+    justify-self: end;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 10px 22px;
+    border-radius: 2px;
+    background: transparent;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+
+  .nav-contact:hover { background: #ffffff; color: var(--brown-dark); }
+
+  .arch-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .arch {
+    background: var(--accent-arch);
+    width: min(220px, 46vw);
+    aspect-ratio: 3.2 / 1;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  .arch-title {
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 0 0.5rem;
+    z-index: 2;
+  }
+
+  .arch-title h1 {
+    font-size: clamp(12px, 2.4vw, 18px);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--brown-dark);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  /* mobile: stack title above the links row */
+  @media (max-width: 640px) {
+    .nav-row {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      gap: 0.85rem;
+    }
+    .nav-links { order: 1; justify-self: center; gap: 1.25rem; font-size: 11px; }
+    .nav-contact { order: 2; justify-self: center; }
+    .arch-wrap {
+      order: 3;
+      width: 100vw;
+      margin: 0.5rem -1.5rem -1.1rem;
+    }
+    .arch {
+      width: 100%;
+      aspect-ratio: 6.5 / 1;
+    }
+    .arch-title h1 {
+      font-size: clamp(24px, 7.5vw, 34px);
+      letter-spacing: 0.02em;
+    }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    text-align: center;
+    padding: 3.5rem 1.5rem 2.5rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .hero h2 {
+    font-size: clamp(32px, 6.5vw, 52px);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.22;
+    color: var(--text-body);
+  }
+
+  .hero p {
+    margin-top: 1.5rem;
+    font-size: 15px;
+    color: var(--text-body);
+    line-height: 1.8;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-logo {
+    margin: 2.5rem auto 0;
+    background: var(--accent-arch);
+    border-radius: 16px;
+    width: min(420px, 100%);
+    padding: 2rem;
+  }
+
+  .hero-logo img { margin: 0 auto; max-width: 220px; }
+
+  /* ---------- SECTION SHARED ---------- */
+  section { padding: 4rem 1.5rem; max-width: 780px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  hr.divider { border: none; border-top: 1px solid var(--border); }
+
+  /* ---------- ABOUT / OUR STORY ---------- */
+  .story-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .story-img { width: 100%; height: 340px; object-fit: cover; }
+
+  .story-block {
+    background: var(--brown-dark);
+    color: var(--cream);
+    padding: 2.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .story-block h3 {
+    font-size: 29px;
+    font-weight: 500;
+    color: var(--accent-arch);
+    margin-bottom: 1rem;
+    letter-spacing: 0.02em;
+  }
+
+  .story-block p { font-size: 14.5px; color: #d8c4a8; line-height: 1.85; }
+
+  @media (max-width: 640px) {
+    .story-section { grid-template-columns: 1fr; }
+    .story-img { height: 220px; }
+  }
+
+  /* ---------- MENU ---------- */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .menu-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .menu-card:hover { border-color: var(--accent-arch); transform: translateY(-2px); }
+
+  .menu-card img { width: 100%; height: 180px; object-fit: cover; }
+
+  .menu-card-body { padding: 1.25rem; }
+
+  .menu-name { font-weight: 600; font-size: 18px; }
+
+  .menu-tag {
+    font-size: 11px;
+    background: #fdf4e7;
+    color: var(--text-muted);
+    border: 1px solid #e8d5a3;
+    border-radius: 20px;
+    padding: 2px 10px;
+    margin: 8px 0;
+    display: inline-block;
+  }
+
+  .menu-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+  #contact {
+    background: var(--brown-dark);
+    max-width: 100%;
+    padding: 4rem 1.5rem;
+  }
+
+  #contact .section-label {
+    color: var(--accent-arch);
+  }
+
+  #contact .contact-card-wrap {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .contact-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    --text-body: #5c4a34;
+    --text-muted: #a07840;
+    --text-primary: var(--brown-dark);
+    --border: #e8e0d0;
+  }
+
+  .contact-card p.intro {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.8;
+    margin-bottom: 1.75rem;
+  }
+
+  .field { margin-bottom: 1.25rem; }
+
+  .field label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .field input,
+  .field textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: #fff;
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--brown-dark);
+  }
+
+  .field textarea { min-height: 130px; resize: vertical; }
+
+  .field input:focus,
+  .field textarea:focus {
+    outline: 2px solid var(--accent-arch);
+    outline-offset: 1px;
+  }
+
+  .form-note {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-actions { display: flex; align-items: center; gap: 1.5rem; }
+
+  .send-btn {
+    background: var(--brown-dark);
+    color: var(--cream);
+    border: none;
+    padding: 13px 34px;
+    border-radius: 30px;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.2s;
+  }
+
+  .send-btn:hover { opacity: 0.85; }
+
+  .cancel-link {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .form-status { margin-top: 1rem; font-size: 13px; }
+  .form-status.success { color: #15803d; }
+  .form-status.error { color: #b91c1c; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    text-align: center;
+    padding: 2.25rem 1.5rem;
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="navbar">
+  <div class="nav-row">
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#menu">Menu</a>
+    </div>
+    <div class="arch-wrap">
+      <div class="arch"></div>
+      <a class="arch-title" href="#home"><h1>Brasa Coffee Co.</h1></a>
+    </div>
+    <a class="nav-contact" href="#contact">Contact</a>
+  </div>
+</div>
+
+<!-- HOME / HERO -->
+<div id="home" class="hero">
+  <h2>THE<br />WARM EMBER<br />IN YOUR DAY.</h2>
+  <p>Specialty coffee rooted in San Antonio. Every cup made with intention, every drink a little piece of the city that raised us.</p>
+  <div class="hero-logo">
+    <img src="images/logo.png" alt="Brasa Coffee Co. logo — chick holding a coffee cup" />
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- ABOUT / OUR STORY -->
+<section id="about">
+  <p class="section-label">Our Story</p>
+  <div class="story-section">
+    <img class="story-img" src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&auto=format&fit=crop" alt="Neon cafe sign" />
+    <div class="story-block">
+      <h3>Born from a quiet ember.</h3>
+      <p>Brasa means the warm glow of a fire after the flame dies down — the part that keeps warming you long after. That's what we're building. One cup, one market, one stranger walking away with our logo on their cup at a time.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- MENU -->
+<section id="menu">
+  <p class="section-label">Our Drinks</p>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1534040385115-33dcb3acba5b?w=600&auto=format&fit=crop" alt="The Canela" />
+      <div class="menu-card-body">
+        <span class="menu-name">The Canela</span>
+        <span class="menu-tag">Signature</span>
+        <p class="menu-desc">Triple shot flat white, brown sugar syrup, cinnamon steeped milk — our reason for existing.</p>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&auto=format&fit=crop" alt="Horchata Latte" />
+      <div class="menu-card-body">
+        <span class="menu-name">Horchata Latte</span>
+        <span class="menu-tag">SA Original</span>
+        <p class="menu-desc">House horchata blend, espresso, oat milk. San Antonio in a cup.</p>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=600&auto=format&fit=crop" alt="Cafecito Shot" />
+      <div class="menu-card-body">
+        <span class="menu-name">Cafecito Shot</span>
+        <span class="menu-tag">Classic</span>
+        <p class="menu-desc">Cuban-style sweetened espresso with a thick whipped sugar crema on top.</p>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=600&auto=format&fit=crop" alt="Cold Brew" />
+      <div class="menu-card-body">
+        <span class="menu-name">Cold Brew</span>
+        <span class="menu-tag">Cold</span>
+        <p class="menu-desc">18-hour cold steep. Smooth, dark, no shortcuts.</p>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1592663527359-cf6642f54cff?w=600&auto=format&fit=crop" alt="Iced Latte" />
+      <div class="menu-card-body">
+        <span class="menu-name">Iced Latte</span>
+        <span class="menu-tag">Cold</span>
+        <p class="menu-desc">Double shot, whole milk, over ice. Simple and reliable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-card-wrap">
+  <p class="section-label">Book the Cart</p>
+  <div class="contact-card">
+    <p class="intro">Planning an event and want Brasa there? Send us a few details and we'll get back to you about availability and setup.</p>
+    <form id="contact-form" action="https://formspree.io/f/mljrrpvo" method="POST">
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required />
+      </div>
+      <div class="field">
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Tell us about your event — date, location, and headcount."></textarea>
+      </div>
+      <p class="form-note">This site is protected against spam. We'll only use your info to respond to your inquiry.</p>
+      <div class="form-actions">
+        <button type="submit" class="send-btn">Send</button>
+        <button type="reset" class="cancel-link">Cancel</button>
+      </div>
+      <p id="form-status" class="form-status" role="status"></p>
+    </form>
+  </div>
+  </div>
+</section>
+
+<footer>
+  @brasacoffeeco &nbsp;·&nbsp; San Antonio, TX &nbsp;·&nbsp; Coming soon to a market near you 🐥
+</footer>
+
+<script>
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    status.textContent = 'Sending…';
+    status.className = 'form-status';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        status.textContent = "Thanks — we'll be in touch soon.";
+        status.className = 'form-status success';
+        form.reset();
+      } else {
+        status.textContent = 'Something went wrong. Please try again.';
+        status.className = 'form-status error';
+      }
+    } catch (err) {
+      status.textContent = 'Something went wrong. Please try again.';
+      status.className = 'form-status error';
+    }
+  });
+</script>
+
+</body>
+</html>

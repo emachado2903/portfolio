@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume — Elizabeth Machado</title>
+  <meta name="description" content="Resume for Elizabeth Machado.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Noto+Serif+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .resume-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 24px 72px;
+    }
+
+    .resume-nav {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 0 8px;
+    }
+
+    .resume-back {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--text);
+      opacity: 0.75;
+      transition: opacity 0.2s;
+    }
+    .resume-back:hover { opacity: 1; }
+
+    .resume-header {
+      text-align: center;
+      max-width: 620px;
+      margin: 40px 0 36px;
+    }
+
+    .resume-header h1 {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-synthesis: none;
+      font-size: clamp(32px, 5vw, 46px);
+      margin: 0 0 10px;
+    }
+
+    .resume-header p {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--text);
+      opacity: 0.8;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .resume-actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 26px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--text);
+    }
+    .btn-outline:hover { background: var(--text); color: var(--bg); }
+
+    .resume-preview {
+      width: 100%;
+      max-width: 780px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+    }
+
+    .resume-preview object,
+    .resume-preview .pdf-fallback {
+      width: 100%;
+      height: 78vh;
+      min-height: 480px;
+      border-radius: 8px;
+      display: block;
+      border: none;
+    }
+
+    .pdf-fallback {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      font-family: var(--font-sans);
+      color: var(--text);
+      text-align: center;
+      padding: 40px;
+    }
+
+    @media (max-width: 640px) {
+      .resume-preview object { height: 60vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="resume-page">
+    <div class="resume-nav">
+      <a class="resume-back" href="../index.html">&larr; Back to Portfolio</a>
+    </div>
+
+    <div class="resume-header">
+      <h1>Resume</h1>
+      <p>The full PDF is below — view it right here, or download your own copy.</p>
+      <div class="resume-actions">
+        <a class="btn btn-pill" href="Elizabeth_Machado_Resume.pdf" download>Download PDF</a>
+        <a class="btn btn-outline" href="Elizabeth_Machado_Resume.pdf" target="_blank" rel="noopener">Open in New Tab</a>
+      </div>
+    </div>
+
+    <div class="resume-preview">
+      <object data="Elizabeth_Machado_Resume.pdf" type="application/pdf">
+        <div class="pdf-fallback">
+          <p>Your browser can't preview the PDF here.</p>
+          <a class="btn btn-pill" href="Elizabeth_Machado_Resume.pdf" download>Download PDF</a>
+        </div>
+      </object>
+    </div>
+  </div>
+
+</body>
+</html>

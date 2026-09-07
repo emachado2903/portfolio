@@ -1,0 +1,588 @@
+/* ============================================================
+   Elizabeth Machado — Portfolio
+   Default theme = the warm cream / dark-green palette from the
+   approved mockup. The toggle switches to a deeper, fuller
+   dark-green "night" theme (see [data-theme="dark"] block).
+   ============================================================ */
+
+:root {
+  /* ---- default (light) theme ---- */
+  --bg: #f5efc9;              /* page background: nav, hero-adjacent, My Story */
+  --text: #1c1c16;            /* main body text on --bg */
+  --surface: #16301f;         /* Selected Works section background */
+  --surface-2: #0d2015;       /* project-card back face */
+  --surface-text: #f5efc9;    /* text/border on the dark-green surfaces */
+  --footer-bg: #0b0b09;
+  --footer-text: #f8f4d9;
+  --border-soft: rgba(0, 0, 0, 0.15);
+  --accent: #c9752f;
+  --accent-hover: #b3661f;
+  --hero-overlay: rgba(20, 15, 10, 0.42);
+  --quote-overlay: rgba(30, 26, 14, 0.28);
+  --contact-overlay: rgba(10, 14, 10, 0.45);
+  --card-bg: rgba(245, 239, 201, 0.95);
+
+  --cream: #f5efc9;   /* fixed cream — same value in both themes, unlike --bg */
+  --forest: #16301f;  /* fixed dark green — same value in both themes */
+  --baby-blue: #a9c9e3; /* fixed baby blue, sampled from the contact photo's sky */
+  --field-bg: #ffffff;
+  --field-border: var(--cream);
+  --send-bg: var(--baby-blue);
+  --send-text: var(--forest);
+  --send-border: var(--baby-blue);
+
+  --font-serif: 'Italiana', Georgia, serif;      /* tall/thin display face: headings, nav, buttons */
+  --font-sans: 'Noto Serif Condensed', Georgia, serif;   /* body copy: paragraphs, form, notes */
+}
+
+[data-theme="dark"] {
+  /* ---- dark mode: a fuller, deeper dark-green "night" theme ---- */
+  --bg: #0a140d;
+  --text: #eee4b8;
+  --surface: #050d07;
+  --surface-2: #020603;
+  --surface-text: #eee4b8;
+  --footer-bg: #000000;
+  --footer-text: #cfc79a;
+  --border-soft: rgba(255, 255, 255, 0.15);
+  --accent: #d98a44;
+  --accent-hover: #e39a56;
+  --hero-overlay: rgba(5, 8, 5, 0.62);
+  --quote-overlay: rgba(6, 12, 7, 0.55);
+  --contact-overlay: rgba(4, 8, 5, 0.68);
+  --card-bg: rgba(15, 25, 16, 0.85);
+
+  --cream: #f5efc9;
+  --forest: #16301f;
+  --baby-blue: #a9c9e3;
+  --field-bg: var(--cream);
+  --field-border: rgba(0, 0, 0, 0.3);
+  --send-bg: var(--baby-blue);
+  --send-text: var(--forest);
+  --send-border: var(--baby-blue);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  transition: background-color .3s ease, color .3s ease;
+}
+
+h1, h2 {
+  font-family: var(--font-serif);
+  font-weight: 400;       /* Italiana ships one weight only — avoid browser-faked bold */
+  font-synthesis: none;
+  margin: 0;
+}
+
+a { color: inherit; text-decoration: none; }
+
+img { max-width: 100%; display: block; }
+
+/* ---------------- Nav ---------------- */
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 48px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border-soft);
+  transition: background-color .3s ease;
+}
+
+.logo {
+  width: 58px;
+  height: 58px;
+  display: block;
+  flex-shrink: 0;
+  perspective: 800px;
+}
+
+.logo-flip {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  transition: transform .6s cubic-bezier(.4,.2,.2,1);
+}
+
+/* the theme toggle flips the logo — same rotateY mechanic as the project cards */
+[data-theme="dark"] .logo-flip {
+  transform: rotateY(180deg);
+}
+
+.logo-face {
+  display: block;
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+.logo-face--back {
+  transform: rotateY(180deg);
+}
+
+.logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  font-family: var(--font-serif);
+  font-size: 21px;
+}
+
+.theme-toggle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border-soft);
+  background: transparent;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: transform .5s ease;
+}
+.theme-toggle .icon-moon { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: none; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: flex; }
+.theme-toggle:hover { transform: rotate(20deg); }
+
+/* ---------------- Hero ---------------- */
+
+.hero {
+  position: relative;
+  min-height: 76vh;
+  background-size: cover;
+  background-position: center 30%;
+  display: flex;
+  align-items: center;
+  padding: 0 64px;
+  color: #fdfbf0;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--hero-overlay);
+}
+
+.hero-content { position: relative; max-width: 640px; }
+
+.hero-kicker {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 24px;
+  margin: 0 0 4px;
+}
+
+.hero-name {
+  font-size: clamp(38px, 5vw, 56px);
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+
+.cursive-svg {
+  display: inline-block;
+  height: 2.6em;
+  width: auto;
+  vertical-align: -1.32em;
+  margin: 0 0.01em 0 -0.02em;
+  position: relative;
+  overflow: hidden;
+}
+
+.cursive-svg-reveal {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -webkit-mask-image: linear-gradient(105deg, #000 0%, #000 50%, transparent 50%, transparent 100%);
+  mask-image: linear-gradient(105deg, #000 0%, #000 50%, transparent 50%, transparent 100%);
+  -webkit-mask-size: 320% 100%;
+  mask-size: 320% 100%;
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+  animation: draw-liz 3.6s ease-in-out .5s forwards;
+}
+
+.cursive-svg svg {
+  display: block;
+  height: 100%;
+  width: auto;
+  overflow: visible;
+}
+
+.cursive-svg path {
+  fill: currentColor;
+}
+
+@keyframes draw-liz {
+  to { -webkit-mask-position: 0% 0; mask-position: 0% 0; }
+}
+
+.pen-tip {
+  position: absolute;
+  top: 50%;
+  left: -60%;
+  width: 0.32em;
+  height: 0.32em;
+  margin: -0.16em 0 0 -0.16em;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 6px 1px rgba(0,0,0,0.35);
+  animation: pen-tip-move 3.6s ease-in-out .5s forwards;
+}
+
+@keyframes pen-tip-move {
+  from { left: -60%; }
+  to { left: 160%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursive-svg-reveal { animation: none; -webkit-mask-image: none; mask-image: none; }
+  .pen-tip { display: none; }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hero-tagline {
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  margin: 0 0 32px;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-size: 15px;
+  padding: 14px 30px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-pill {
+  background: #14110c;
+  color: #fdfbf0;
+}
+.btn-pill:hover { background: #262019; }
+
+/* ---------------- My Story ---------------- */
+
+.story {
+  scroll-margin-top: 100px;   /* keeps the sticky nav from covering the heading on anchor-jump */
+  padding: 150px 64px 100px;  /* extra top room so it doesn't feel cramped right under the nav */
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+  gap: 60px;
+  align-items: start;
+}
+
+.story h2 { font-size: 42px; }
+
+.story p {
+  font-size: 15.5px;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ---------------- Quote banner ---------------- */
+
+.quote-banner {
+  position: relative;
+  min-height: 40vh;
+  background-size: cover;
+  background-position: center 38%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.quote-overlay { position: absolute; inset: 0; background: var(--quote-overlay); }
+
+.quote-banner p {
+  position: relative;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(28px, 4.4vw, 44px);
+  color: var(--cream);
+  text-align: center;
+  max-width: 800px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.55);
+}
+
+/* ---------------- Selected Works ---------------- */
+
+.works {
+  scroll-margin-top: 100px;
+  background: var(--surface);
+  color: var(--surface-text);
+  padding: 90px 48px;
+  text-align: center;
+  transition: background-color .3s ease;
+}
+
+.works h2 { font-size: 42px; margin-bottom: 50px; }
+
+.project-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 44px;
+  perspective: 1200px;
+}
+
+.project-card {
+  width: 190px;
+  height: 190px;
+  display: block;
+}
+
+.project-flip {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  transition: transform .6s cubic-bezier(.4,.2,.2,1);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+.project-card:hover .project-flip,
+.project-card:focus-visible .project-flip {
+  transform: rotateY(180deg);
+}
+
+.project-face {
+  display: block;
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 3px solid var(--surface-text);
+}
+
+.project-face--front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* DINO_CODE uses a transparent logo badge rather than a cropped photo —
+   show it whole (contain) on a solid backing instead of cover-cropping it */
+.project-face--badge {
+  background: var(--surface-2);
+}
+
+.project-face--badge img {
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
+}
+
+/* TrailPaceTracker uses a wide terminal-title screenshot — a true black
+   backing matches the terminal itself instead of the dark green surface */
+.project-face--badge-dark {
+  background: #0a0a0a;
+}
+
+/* this crop is a wide, short strip (a terminal title bar) — give it a much
+   larger bounding box than the default badge so the text reads as big as
+   the aspect ratio allows, instead of shrinking to fit a squarer 78% box */
+.project-face--badge-wide img {
+  width: 96%;
+  height: 96%;
+}
+
+/* Harborlight Digital ships two logo lockups, matched to the site's own
+   light/dark backing colors — swap which one shows with the theme toggle */
+.theme-img--dark {
+  display: none;
+}
+
+[data-theme="dark"] .project-face--front .theme-img--light {
+  display: none;
+}
+
+[data-theme="dark"] .project-face--front .theme-img--dark {
+  display: block;
+}
+
+.project-face--back {
+  background: var(--surface-2);
+  color: var(--surface-text);
+  transform: rotateY(180deg);
+  font-family: var(--font-serif);
+  font-size: 17px;
+  padding: 10px;
+  text-align: center;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.project-face-note {
+  font-family: var(--font-sans);
+  font-style: italic;
+  font-size: 11px;
+  opacity: 0.7;
+  letter-spacing: 0.04em;
+}
+
+.works-note {
+  margin-top: 44px;
+  font-size: 12.5px;
+  opacity: 0.65;
+  font-style: italic;
+}
+
+/* ---------------- Contact ---------------- */
+
+.contact {
+  scroll-margin-top: 100px;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  padding: 90px 64px;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+
+.contact-overlay { position: absolute; inset: 0; background: var(--contact-overlay); }
+
+.contact-inner {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 380px) 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.contact-form {
+  background: var(--card-bg);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contact-form label {
+  font-size: 12px;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  padding: 9px 10px;
+  border: 1px solid var(--field-border);
+  border-radius: 3px;
+  background: var(--field-bg);
+  transition: background-color .3s ease, border-color .3s ease;
+}
+
+.btn-send {
+  margin-top: 18px;
+  background: var(--send-bg);
+  color: var(--send-text);
+  border: 1px solid var(--send-border);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: background-color .3s ease, color .3s ease, border-color .3s ease;
+}
+.btn-send:hover { opacity: 0.85; }
+
+.contact-heading h2 {
+  font-size: clamp(34px, 5vw, 52px);
+  color: #fdfbf0;
+  margin-bottom: 18px;
+}
+
+.social-links {
+  display: flex;
+  gap: 24px;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: #fdfbf0;
+}
+.social-links a { border-bottom: 1px solid rgba(253,251,240,0.5); }
+.social-links a:hover { border-color: #fdfbf0; }
+
+/* ---------------- Footer ---------------- */
+
+.site-footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  text-align: center;
+  padding: 26px;
+  font-size: 12.5px;
+}
+
+/* ---------------- Responsive (mobile) ---------------- */
+
+@media (max-width: 860px) {
+  .site-nav { padding: 14px 20px; }
+  .nav-links { gap: 20px; font-size: 13px; }
+
+  .hero { padding: 0 24px; min-height: 58vh; }
+
+  .story {
+    grid-template-columns: 1fr;
+    padding: 60px 24px;
+    gap: 20px;
+  }
+
+  .works { padding: 60px 20px; }
+  .project-grid { gap: 26px; }
+  .project-card { width: 140px; height: 140px; }
+
+  .contact { padding: 60px 24px; }
+  .contact-inner { grid-template-columns: 1fr; gap: 36px; }
+  .contact-heading { order: 1; }
+  .contact-form { order: 2; }
+}
