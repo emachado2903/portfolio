@@ -434,6 +434,12 @@ img { max-width: 100%; display: block; }
   height: 96%;
 }
 
+
+.project-face--badge-large img {
+  width: 92%;
+  height: 92%;
+}
+
 /* Harborlight Digital ships two logo lockups, matched to the site's own
    light/dark backing colors — swap which one shows with the theme toggle */
 .theme-img--dark {
