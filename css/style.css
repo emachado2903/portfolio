@@ -423,7 +423,11 @@ img { max-width: 100%; display: block; }
 /* TrailPaceTracker uses a wide terminal-title screenshot — a true black
    backing matches the terminal itself instead of the dark green surface */
 .project-face--badge-dark {
-  background: #291437;
+  background: #0a0a0a;
+}
+
+.project-face--badge-purple {
+  background: #261630;
 }
 
 /* this crop is a wide, short strip (a terminal title bar) — give it a much
