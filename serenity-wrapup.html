@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serenity Wrap-Up</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600&family=Montserrat:wght@400;500;600&family=Nunito:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #A9C1D6;
+    --bg-soft: #E3F1F7;
+    --ink: #1B2A3C;
+    --ink-soft: #33465A;
+    --line: #2B3A4B;
+    --pill-bg: #1B2A3C;
+    --pill-ink: #E8F0F6;
+    --card-top: #E3F1F7;
+    --card-bottom: #B8CCDD;
+    --card-edge: #EEF5F9;
+    --shadow: #1B2A3C;
+    --field: #FFFFFF;
+    --display: 'Josefin Sans', 'Century Gothic', 'Futura', sans-serif;
+    --body: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+    --sub: 'Nunito', 'Helvetica Neue', Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1C2D40;
+      --bg-soft: #24394F;
+      --ink: #E4EDF4;
+      --ink-soft: #A9C1D6;
+      --line: #8FA9BF;
+      --pill-bg: #A9C1D6;
+      --pill-ink: #1C2D40;
+      --card-top: #2A4159;
+      --card-bottom: #1F3247;
+      --card-edge: #46627F;
+      --shadow: #0E1824;
+      --field: #24394F;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sub);
+    padding: 40px 16px;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; }
+
+  .waves { width: 100%; height: 46px; color: var(--line); display: block; margin-bottom: 22px; opacity: .75; }
+
+  .eyebrow {
+    display: inline-block; background: var(--pill-bg); color: var(--pill-ink);
+    font-family: var(--body); font-weight: 500; font-size: 11px; letter-spacing: .22em;
+    text-transform: uppercase; padding: 7px 16px; border-radius: 999px;
+  }
+  h1 {
+    font-family: var(--display); font-weight: 200; text-transform: uppercase;
+    font-size: clamp(30px, 6vw, 46px); line-height: 1.05; margin: 16px 0 10px;
+  }
+  .lede {
+    font-family: var(--sub); font-size: 16px; line-height: 1.65; color: var(--ink-soft);
+    max-width: 52ch; margin: 0 0 34px;
+  }
+
+  .card {
+    background: linear-gradient(180deg, var(--card-top), var(--card-bottom));
+    border: 1px solid var(--card-edge);
+    border-radius: 18px;
+    padding: 22px 22px 26px;
+    margin-bottom: 18px;
+    box-shadow: 0 10px 26px rgba(27,42,60,0.12);
+  }
+  .q-label {
+    font-family: var(--body); font-weight: 600; font-size: 14.5px;
+    color: var(--ink); margin: 0 0 4px; line-height: 1.4;
+  }
+  .q-help {
+    font-family: var(--sub); font-size: 13px; color: var(--ink-soft); margin: 0 0 14px;
+  }
+
+  .scale { display: flex; gap: 8px; flex-wrap: wrap; }
+  .scale label {
+    flex: 1 1 0; min-width: 44px; text-align: center;
+    font-family: var(--body); font-weight: 600; font-size: 15px;
+    padding: 10px 0; border-radius: 12px; cursor: pointer;
+    border: 1px solid var(--line);
+    background: var(--field); color: var(--ink-soft);
+  }
+  .scale input { position: absolute; opacity: 0; pointer-events: none; }
+  .scale input:checked + label {
+    background: var(--pill-bg); color: var(--pill-ink); border-color: var(--pill-bg);
+  }
+  .scale-caption { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-soft); margin-top: 6px; font-family: var(--body); letter-spacing: .05em; text-transform: uppercase; }
+
+  .stars { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 6px; }
+  .stars input { position: absolute; opacity: 0; pointer-events: none; }
+  .stars label {
+    font-size: 34px; line-height: 1; color: var(--line); cursor: pointer;
+    transition: color .12s ease;
+  }
+  .stars input:checked ~ label,
+  .stars label:hover,
+  .stars label:hover ~ label {
+    color: var(--pill-bg);
+  }
+
+  .yn { display: flex; gap: 10px; }
+  .yn label {
+    font-family: var(--body); font-weight: 600; font-size: 14px;
+    padding: 10px 22px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--line);
+    background: var(--field); color: var(--ink-soft);
+  }
+  .yn input { position: absolute; opacity: 0; pointer-events: none; }
+  .yn input:checked + label { background: #DCEEE3; color: #2E6B4F; border-color: #2E6B4F; }
+  @media (prefers-color-scheme: dark) {
+    .yn input:checked + label { background: #203B31; color: #6FCE9E; border-color: #6FCE9E; }
+  }
+
+  textarea {
+    width: 100%; font: inherit; font-size: 15px; color: var(--ink); background: var(--field);
+    border: 1px solid var(--line); border-radius: 14px;
+    padding: 12px 14px; resize: vertical; min-height: 100px;
+  }
+  textarea::placeholder { color: var(--ink-soft); opacity: .75; }
+
+  .submit-row { display: flex; justify-content: flex-end; margin-top: 8px; align-items: center; gap: 12px; }
+  .error-msg { font-family: var(--body); font-size: 13px; color: #B3413D; display: none; }
+  .error-msg.show { display: block; }
+  button.btn {
+    font-family: var(--body); font-weight: 600; font-size: 14px; letter-spacing: .05em;
+    text-transform: uppercase; color: var(--pill-ink); background: var(--pill-bg);
+    border: none; border-radius: 999px; padding: 14px 30px; cursor: pointer;
+  }
+  button.btn:hover { filter: brightness(1.08); }
+  button.btn:disabled { opacity: .6; cursor: default; }
+
+  .done { display: none; text-align: center; padding: 20px 4px 6px; }
+  .done.show { display: block; }
+  .done h1 { font-size: clamp(26px, 5vw, 36px); }
+  .done p { font-family: var(--sub); color: var(--ink-soft); font-size: 15px; line-height: 1.6; max-width: 46ch; margin: 0 auto 20px; }
+  .summary {
+    text-align: left;
+    background: var(--field);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 18px;
+    font-family: var(--body);
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--ink);
+    white-space: pre-wrap;
+    margin-bottom: 18px;
+  }
+  .copy-row { display: flex; justify-content: center; }
+  .copy-note { font-size: 12.5px; color: var(--ink-soft); margin-top: 10px; font-family: var(--sub); text-align: center; }
+
+  form.hide { display: none; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <svg class="waves" viewBox="0 0 600 60" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 40 C 60 10, 120 10, 180 40 S 300 70, 360 40 S 480 10, 540 40 S 600 55 600 40" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  </svg>
+
+  <span class="eyebrow">Serenity Tattoo Studio</span>
+  <h1>Project Wrap&#8209;Up</h1>
+  <p class="lede">The site's live and the last few fixes are done &mdash; before I close this out, I'd love a few minutes of your honest feedback. Nothing here is required, answer whatever feels useful.</p>
+
+  <form id="wrapupForm">
+    <div class="card">
+      <p class="q-label">Can I list Serenity Tattoo Studio as a client on my own site (Harborlight Digital)?</p>
+      <div class="yn">
+        <input type="radio" name="listClient" id="lc-yes" value="Yes"><label for="lc-yes">Yes</label>
+        <input type="radio" name="listClient" id="lc-no" value="No"><label for="lc-no">No</label>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="q-label">Okay if I feature your website on my portfolio, elizabethmachado.me?</p>
+      <div class="yn">
+        <input type="radio" name="screenshots" id="ss-yes" value="Yes"><label for="ss-yes">Yes</label>
+        <input type="radio" name="screenshots" id="ss-no" value="No"><label for="ss-no">No</label>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="q-label">Testimonial</p>
+      <p class="q-help">How did you like your experience, and what stood out most? This may be featured on my business site, Harborlight Digital.</p>
+      <textarea name="testimonialText" placeholder="Write it however feels natural &mdash; a couple sentences is plenty."></textarea>
+    </div>
+
+    <div class="submit-row">
+      <span class="error-msg" id="errorMsg">Something went wrong sending that &mdash; try again, or use the copy button below.</span>
+      <button type="submit" class="btn" id="submitBtn">Send to Liz</button>
+    </div>
+  </form>
+
+  <div class="done" id="done">
+    <span class="eyebrow">Thank you!</span>
+    <h1>Got it, thanks!</h1>
+    <p>Your answers are on their way to Liz. You can also copy them below just in case.</p>
+    <div class="summary" id="summaryText"></div>
+    <div class="copy-row">
+      <button class="btn" id="copyBtn" type="button">Copy answers</button>
+    </div>
+    <p class="copy-note" id="copyNote"></p>
+  </div>
+</div>
+
+<script>
+  // Paste your Formspree endpoint ID below (same pattern as the contact form) —
+  // e.g. "https://formspree.io/f/abcdwxyz". Create a new form at formspree.io
+  // so these responses land in their own inbox, separate from contact messages.
+  const FORM_ENDPOINT = "https://formspree.io/f/mjykzabn";
+
+  const form = document.getElementById('wrapupForm');
+  const done = document.getElementById('done');
+  const summaryText = document.getElementById('summaryText');
+  const copyBtn = document.getElementById('copyBtn');
+  const copyNote = document.getElementById('copyNote');
+  const errorMsg = document.getElementById('errorMsg');
+  const submitBtn = document.getElementById('submitBtn');
+
+  function buildSummary(data) {
+    const lines = [
+      'Serenity Tattoo Studio -- Project Wrap-Up',
+      '',
+      'OK to list as a client: ' + (data.listClient || '(not answered)'),
+      'OK to feature website: ' + (data.screenshots || '(not answered)'),
+      '',
+      'Testimonial:',
+      data.testimonialText || '(not answered)',
+    ];
+    return lines.join('\n');
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    errorMsg.classList.remove('show');
+
+    const fd = new FormData(form);
+    const data = {
+      listClient: fd.get('listClient') || '',
+      screenshots: fd.get('screenshots') || '',
+      testimonialText: (fd.get('testimonialText') || '').toString().trim(),
+    };
+
+    let sent = false;
+    if (FORM_ENDPOINT) {
+      try {
+        const res = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: fd
+        });
+        sent = res.ok;
+      } catch (err) {
+        sent = false;
+      }
+    }
+
+    summaryText.textContent = buildSummary(data);
+
+    if (!sent) {
+      errorMsg.classList.add('show');
+      submitBtn.disabled = false;
+      // Still show the thank-you/copy screen so they have a way to get you
+      // their answers even if the send failed.
+    }
+
+    form.classList.add('hide');
+    done.classList.add('show');
+  });
+
+  copyBtn.addEventListener('click', async () => {
+    const text = summaryText.textContent;
+    try {
+      await navigator.clipboard.writeText(text);
+      copyNote.textContent = 'Copied! Paste it into a text or email to send.';
+    } catch (err) {
+      const range = document.createRange();
+      range.selectNodeContents(summaryText);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      copyNote.textContent = 'Copy didn’t run automatically — the text above is selected, use Cmd/Ctrl+C.';
+    }
+  });
+</script>
+</body>
+</html>
