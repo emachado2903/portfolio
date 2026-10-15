@@ -388,6 +388,11 @@ img { max-width: 100%; display: block; }
 .project-card.is-flipped .project-flip {
   transform: rotateY(180deg);
 }
+/* Cards with no link yet: clicking flips them back to the front instead of
+   jumping to the top. Stays closed until the pointer/focus leaves the card. */
+.project-card.is-closed .project-flip {
+  transform: rotateY(0deg);
+}
 
 .project-face {
   display: block;
