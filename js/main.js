@@ -45,6 +45,27 @@
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // Desktop (mouse/keyboard): cards with no real link yet (href="#") would
+  // jump the page to the top when clicked. Instead, flip them back to the
+  // front in place; they're free to flip again once the pointer leaves.
+  var hasHover = !(window.matchMedia && window.matchMedia('(hover: none)').matches);
+  if (hasHover) {
+    document.querySelectorAll('.project-card').forEach(function (card) {
+      var href = card.getAttribute('href');
+      if (href && href !== '#') return;
+      card.addEventListener('click', function (e) {
+        e.preventDefault();
+        card.classList.toggle('is-closed');
+      });
+      card.addEventListener('mouseleave', function () {
+        card.classList.remove('is-closed');
+      });
+      card.addEventListener('blur', function () {
+        card.classList.remove('is-closed');
+      });
+    });
+  }
+
   // On touch devices there's no hover, so the project circles can't reveal
   // their name that way. First tap flips the card to show the name;
   // tapping the same card again (or its "open" reach) follows the link.
